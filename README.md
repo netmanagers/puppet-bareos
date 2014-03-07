@@ -4,13 +4,13 @@ This is a Puppet module for bareos based on the second generation layout ("NextG
 
 Made by Javier Bértoli / Netmanagers
 
-Forked from netmanagers/puppet-bacula@b3bcc03b2775521c35ed68ad9d69956e817ff808
+Forked from http://github.com/netmanagers/puppet-bacula
 
-**WARNING!!! WARNING!!! WARNING!!!
+**WARNING!!! WARNING!!! WARNING!!!**
 
-NOT EVEN TESTED ONCE YET!!!!!!!!!!!!!!
+**NOT EVEN TESTED ONCE YET!!!!!!!!!!!!!!**
 
-HERE BE DRAGONS!!**
+**HERE BE DRAGONS!!**
 
 Based on Example42 modules made by Alessandro Franceschi / Lab42
 
