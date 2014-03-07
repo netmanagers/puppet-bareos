@@ -1,0 +1,28 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+Client {
+  Name = "<%= @name %>"
+  Address = <%= @address %>
+<% if @port != '' -%>
+  FDPort = <%= @port %>
+<% end -%>
+<% if @real_password != '' -%>
+  Password = "<%= @real_password %>"
+<% end -%>
+  Catalog = "<%= @real_catalog %>"
+<% if @real_file_retention != '' -%>
+  FileRetention = <%= @real_file_retention %>
+<% end -%>
+<% if @real_job_retention != '' -%>
+  JobRetention = <%= @real_job_retention %>
+<% end -%>
+<% if @auto_prune != '' -%>
+  AutoPrune = <%= @auto_prune %>
+<% end -%>
+<% if @real_max_concurrent != '' -%>
+  MaximumConcurrentJobs = <%= @real_max_concurrent %>
+<% end -%>
+<% if scope.lookupvar('bareos::heartbeat_interval') != '' -%>
+  HeartbeatInterval = <%= scope.lookupvar('bareos::heartbeat_interval') %>
+<% end -%>
+}

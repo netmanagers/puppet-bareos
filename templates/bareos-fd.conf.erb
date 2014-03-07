@@ -1,0 +1,32 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+# Directors who are permitted to contact this File daemon.
+Director {
+  Name = "<%= scope.lookupvar('bareos::director_name') %>"
+  Password = "<%= @real_client_password %>"
+}
+
+# Restricted Director, used by tray-monitor for File daemon status.
+Director {
+  Name = "<%= scope.lookupvar('bareos::traymon_name') %>"
+  Password = "<%= scope.lookupvar('bareos::real_traymon_password') %>"
+  Monitor = Yes
+}
+
+# "Global" File daemon configuration specifications.
+FileDaemon {
+  Name = "<%= scope.lookupvar('bareos::client_name') %>"
+  FDport = <%= scope.lookupvar('bareos::client_port') %>
+  WorkingDirectory = <%= scope.lookupvar('bareos::working_directory') %>
+  PidDirectory = <%= scope.lookupvar('bareos::pid_directory') %>
+<% if scope.lookupvar('bareos::client_max_concurrent') != '' -%>
+  MaximumConcurrentJobs = <%= scope.lookupvar('bareos::client_max_concurrent') %>
+<% end -%>
+  FDAddress = <%= scope.lookupvar('bareos::client_address') %>
+  Heartbeat Interval = <%= scope.lookupvar('bareos::heartbeat_interval') %>
+}
+
+Messages {
+  Name = "<%= scope.lookupvar('bareos::default_messages') %>"
+  Director = <%= scope.lookupvar('bareos::director_name') %> = all, !skipped, !restored
+}

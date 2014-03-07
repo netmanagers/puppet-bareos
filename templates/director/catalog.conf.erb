@@ -1,0 +1,19 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+Catalog {
+  Name = "<%= @name %>"
+<% if @db_driver != '' -%>
+  DBDriver = <%= @db_driver %>
+<% end -%>
+<% if @db_address != '' -%>
+  DBAddress = <%= @db_address %>
+<% end -%>
+<% if @db_port != '' -%>
+  DBPort = <%= @db_port %>
+<% end -%>
+<% if @db_name != '' and
+      @db_user != '' and
+      @real_password != '' -%>
+  DBName = "<%= @db_name %>"; dbuser = "<%= @db_user %>"; dbpassword = "<%= @real_password %>";
+<% end -%>
+}

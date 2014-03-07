@@ -1,0 +1,9 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+# Bareos User Agent "Console" (bconsole).
+Director {
+  Name = "<%= scope.lookupvar('bareos::director_name') %>"
+  DIRPort = <%= scope.lookupvar('bareos::director_port') %>
+  Address = <%= scope.lookupvar('bareos::director_address') %>
+  Password = "<%= @real_console_password %>"
+}

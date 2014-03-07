@@ -1,0 +1,15 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+Device {
+  Name = "<%= @name %>"
+  DeviceType = <%= @device_type %>
+<% if @media_type != '' -%>
+  MediaType = <%= @media_type %>
+<% end -%>
+  ArchiveDevice = <%= @real_archive_device %>
+  LabelMedia = <%= @label_media %>
+  RandomAccess = <%= @random_access %>
+  AutomaticMount = <%= @automatic_mount %>
+  RemovableMedia = <%= @removable_media %>
+  AlwaysOpen = <%= @always_open %>
+}

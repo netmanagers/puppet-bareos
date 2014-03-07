@@ -1,0 +1,28 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+# Define the Director name, password used for authenticating the Console program.
+Director {
+  Name = "<%= scope.lookupvar('bareos::director_name') %>"
+  DirPort = <%= scope.lookupvar('bareos::director_port') %>
+  QueryFile = <%= scope.lookupvar('bareos::config_dir') %>/scripts/query.sql
+  WorkingDirectory = <%= scope.lookupvar('bareos::working_directory') %>
+  PidDirectory = <%= scope.lookupvar('bareos::pid_directory') %>
+  MaximumConcurrentJobs = <%= scope.lookupvar('bareos::director_max_concurrent') %>
+  Password = "<%= @real_director_password %>"
+  Messages = "<%= scope.lookupvar('bareos::default_messages') %>"
+  DirAddress = <%= scope.lookupvar('bareos::director_address') %>
+  HeartbeatInterval = <%= scope.lookupvar('bareos::heartbeat_interval') %>
+}
+
+# Restricted Console, used by tray-monitor for Director status.
+Console {
+  Name = "<%= scope.lookupvar('bareos::traymon_name') %>"
+  Password = "<%= scope.lookupvar('bareos::real_traymon_password') %>"
+  CommandACL = <%= scope.lookupvar('bareos::traymon_command') %>
+}
+
+# Include split config files. Remember to bconsole "reload" after modifying a config file.
+@|"find <%= scope.lookupvar('bareos::director_configs_dir') %> -name '*.conf' -type f -exec echo @{} \;"
+
+# Read client directory for config files. Remember to bconsole "reload" after adding a client.
+@|"find <%= scope.lookupvar('bareos::director_clients_dir') %> -name '*.conf' -type f -exec echo @{} \;"

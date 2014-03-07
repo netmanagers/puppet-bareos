@@ -1,0 +1,36 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+Pool {
+  Name = "<%= @name %>"
+  PoolType = <%= @type %>
+<% if @maximum_volume_jobs != '' -%>
+  MaximumVolumeJobs = <%= @maximum_volume_jobs %>
+<% end -%>
+<% if @maximum_volume_bytes != '' -%>
+  MaximumVolumeBytes = <%= @maximum_volume_bytes %>
+<% end -%>
+<% if @use_volume_once != '' -%>
+  UseVolumeOnce = <%= @use_volume_once %>
+<% end -%>
+<% if @recycle != '' -%>
+  Recycle = <%= @recycle %>
+<% end -%>
+<% if @action_on_purge != '' -%>
+  ActionOnPurge = <%= @action_on_purge %>
+<% end -%>
+<% if @auto_prune != '' -%>
+  AutoPrune = <%= @auto_prune %>
+<% end -%>
+<% if @volume_use_duration != '' -%>
+  Volume Use Duration = <%= @volume_use_duration %>
+<% end -%>
+<% if @volume_retention != '' -%>
+  VolumeRetention = <%= @volume_retention %>
+<% end -%>
+<% if @label_format != '' -%>
+  LabelFormat = "<%= @label_format %>"
+<% end -%>
+<% if @storage != '' -%>
+  Storage = "<%= @storage %>"
+<% end -%>
+}

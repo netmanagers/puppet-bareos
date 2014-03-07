@@ -1,0 +1,34 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+# Note: use external director address for clients to connect.
+Storage {
+  Name = "<%= scope.lookupvar('bareos::storage_name') %>"
+  SDAddress = <%= scope.lookupvar('bareos::storage_address') %>
+  SDPort = <%= scope.lookupvar('bareos::storage_port') %>
+  WorkingDirectory = <%= scope.lookupvar('bareos::working_directory') %>
+  Pid Directory = <%= scope.lookupvar('bareos::pid_directory') %>
+  Maximum Concurrent Jobs = <%= scope.lookupvar('bareos::storage_max_concurrent') %>
+  Heartbeat Interval = <%= scope.lookupvar('bareos::heartbeat_interval') %>
+}
+
+# Director who is permitted to contact this Storage daemon.
+Director {
+  Name = "<%= scope.lookupvar('bareos::director_name') %>"
+  Password = "<%= @real_storage_password %>"
+}
+
+# Storage devices.
+# Read storage directory for config files. Remember to bconsole "reload" after adding a client.
+@|"sh -c 'cat <%= scope.lookupvar('bareos::storage_configs_dir') %>/*.conf'"
+
+# Restricted Director, used by tray-monitor for Storage daemon status.
+Director {
+  Name = "<%= scope.lookupvar('bareos::traymon_name') %>"
+  Password = "<%= scope.lookupvar('bareos::real_traymon_password') %>"
+  Monitor = Yes
+}
+
+Messages {
+  Name = "<%= scope.lookupvar('bareos::default_messages') %>"
+  Director = <%= scope.lookupvar('bareos::director_name') %> = all, !skipped, !restored
+}

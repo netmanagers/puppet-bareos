@@ -1,0 +1,18 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+Messages {
+  Name = "<%= @name %>"
+<% if @mail_command != '' and
+      @mail_host    != '' and
+      @mail_from    != '' and
+      @array_mail_to != [] -%>
+  mailcommand = "<%= @mail_command %> -h <%= @mail_host %> -f \"Bareos <<%= @mail_from %>>\" -s \"Bareos: %t %e of %c %l\" %r"
+  operatorcommand = "<%= @mail_command %> -h <%= @mail_host %> -f \"Bareos <<%= @mail_from %>>\" -s \"Bareos: Intervention needed for %j\" %r"
+  mail = <%= @array_mail_to * ',' %> = all, !skipped
+  operator = <%= @array_mail_to * ',' %> = mount
+  mailonerror = <%= @array_mail_to * ',' %> = all
+<% end -%>
+  console = all, !skipped, !saved
+  catalog = all, !skipped, !saved
+  append = "<%= scope.lookupvar('bareos::log_file') %>" = all, !skipped
+}

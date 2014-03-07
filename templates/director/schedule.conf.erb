@@ -1,0 +1,10 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+Schedule {
+  Name = "<%= @name %>"
+<% if @array_run_spec != [] -%>
+<% @array_run_spec.each do |run_spec| -%>
+  Run = Level=<%=run_spec[0] %> <%=run_spec[1] %> at <%=run_spec[2] %>
+<% end -%>
+<% end -%>
+}

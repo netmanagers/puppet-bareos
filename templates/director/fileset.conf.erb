@@ -1,0 +1,62 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+FileSet {
+  Name = "<%= @name %>"
+<% if @ignore_fileset_changes != '' -%>
+  IgnoreFileSetChanges = <%= @ignore_fileset_changes %>
+<% end -%>
+  Include {
+    Options {
+<% if @signature != '' -%>
+      signature = <%= @signature %>
+<% end -%>
+<% if @compression != '' -%>
+      compression = <%= @compression %>
+<% end -%>
+<% if @onefs != '' -%>
+      onefs = <%= @onefs %>
+<% end -%>
+<% if @recurse != '' -%>
+      recurse = <%= @recurse %>
+<% end -%>
+<% if @sparse != '' -%>
+      sparse = <%= @sparse %>
+<% end -%>
+<% if @noatime != '' -%>
+      noatime = <%= @noatime %>
+<% end -%>
+<% if @mtimeonly != '' -%>
+      mtimeonly = <%= @mtimeonly %>
+<% end -%>
+<% if @keepatime != '' -%>
+      keepatime = <%= @keepatime %>
+<% end -%>
+<% if @checkfilechanges != '' -%>
+      checkfilechanges = <%= @checkfilechanges %>
+<% end -%>
+<% if @hardlinks != '' -%>
+      hardlinks = <%= @hardlinks %>
+<% end -%>
+<% if @ignorecase != '' -%>
+      ignorecase = <%= @ignorecase %>
+<% end -%>
+<% if @array_filesets_fstype != [] -%>
+<% @array_filesets_fstype.each do |filesets_fstype| -%>
+      fstype = <%=filesets_fstype  %>
+<% end -%>
+<% end -%>
+    }
+<% if @array_filesets_include != [] -%>
+<% @array_filesets_include.each do |filesets_include| -%>
+    File = <%=filesets_include  %>
+<% end -%>
+<% end -%>
+  }
+  Exclude {
+<% if @array_filesets_exclude != [] -%>
+<% @array_filesets_exclude.each do |filesets_exclude| -%>
+    File = <%=filesets_exclude  %>
+<% end -%>
+<% end -%>
+  }
+}
