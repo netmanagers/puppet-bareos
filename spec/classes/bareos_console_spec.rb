@@ -4,17 +4,18 @@ describe 'bareos::console' do
 
   let(:title) { 'bareos::console' }
   let(:node) { 'rspec.example42.com' }
-  let(:facts) { { :ipaddress => '10.42.42.42' } }
+  let(:facts) { { :ipaddress => '10.42.42.42', :operatingsystem => 'Debian' } }
 
   describe 'Test standard Centos installation' do
     let(:facts) { { :operatingsystem => 'Centos' } }
-    it { should contain_package('bareos-console').with_ensure('present') }
+    it { should contain_package('bareos-bconsole').with_ensure('present') }
     it { should contain_file('bconsole.conf').with_ensure('present') }
   end
 
   describe 'Test customizations - provide source' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_console_source  => 'puppet:///modules/bareos/bconsole.source'
       }
     end
@@ -25,6 +26,7 @@ describe 'bareos::console' do
   describe 'Test customizations - master_password' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_console_name => 'master_console',
         :bareos_default_password => 'abcdefg',
         :bareos_console_template => 'bareos/bconsole.conf.erb'
@@ -36,6 +38,7 @@ describe 'bareos::console' do
   describe 'Test customizations - provided template' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_director_name => 'here_director',
         :bareos_director_address => '10.42.42.42',
         :bareos_default_password => 'testing',
@@ -63,6 +66,7 @@ Director {
   describe 'Test customizations - custom template' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_console_template => 'bareos/spec.erb',
         :options => { 'opt_a' => 'value_a' }
       }
@@ -78,15 +82,15 @@ Director {
 
   describe 'Test Centos decommissioning - absent' do
     let(:facts) { {:bareos_absent => true, :operatingsystem => 'Centos'} }
-    it 'should remove Package[bareos-console]' do
-      should contain_package('bareos-console').with_ensure('absent')
+    it 'should remove Package[bareos-bconsole]' do
+      should contain_package('bareos-bconsole').with_ensure('absent')
       should contain_file('bconsole.conf').with_ensure('absent')
     end
   end
 
   describe 'Test noops mode' do
-    let(:facts) { {:bareos_noops => true} }
-    it { should contain_package('bareos-console').with_noop('true') }
+    let(:facts) { {:bareos_noops => true, :operatingsystem => 'Centos'} }
+    it { should contain_package('bareos-bconsole').with_noop('true') }
     it { should contain_file('bconsole.conf').with_noop('true') }
   end
 end

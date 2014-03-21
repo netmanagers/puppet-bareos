@@ -32,9 +32,12 @@ class bareos::storage {
   }
 
   ### Managed resources
+  require bareos::repository
+
   package { $bareos::storage_package:
     ensure  => $bareos::manage_package,
     noop    => $bareos::noops,
+    require => [Class['bareos::repository'], Package['bareos::database_package']],
   }
 
   if  $bareos::storage_configs_dir != $bareos::config_dir and

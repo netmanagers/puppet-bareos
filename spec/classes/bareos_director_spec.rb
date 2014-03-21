@@ -7,11 +7,12 @@ describe 'bareos::director' do
   let(:facts) do
     {
       :manage_director => 'true',
+      :operatingsystem => 'Debian',
       :ipaddress => '10.42.42.42'
     }
   end
   describe 'Test standard Centos installation' do
-    it { should contain_package('bareos-director-mysql').with_ensure('present') }
+    it { should contain_package('bareos-director').with_ensure('present') }
     it { should contain_file('bareos-dir.conf').with_ensure('present') }
     it { should contain_file('bareos-dir.conf').with_path('/etc/bareos/bareos-dir.conf') }
     it { should contain_file('bareos-dir.conf').without_content }
@@ -29,6 +30,7 @@ describe 'bareos::director' do
   describe 'Test customizations - provide source' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_director_source  => 'puppet:///modules/bareos/bareos.source'
       }
     end
@@ -39,6 +41,7 @@ describe 'bareos::director' do
   describe 'Test customizations - default_password' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_director_name => 'master_director',
         :bareos_default_password => 'master_pass',
         :bareos_director_template => 'bareos/bareos-dir.conf.erb'
@@ -50,6 +53,7 @@ describe 'bareos::director' do
   describe 'Test customizations - provided template - most parameters' do
     let(:facts) do
       {
+        :operatingsystem => 'Centos',
         :bareos_director_name => 'here_director',
         :bareos_default_password => 'default_pass',
         :bareos_director_password => 'director_pass',
@@ -96,6 +100,7 @@ Console {
   describe 'Test customizations - custom template' do
     let(:facts) do
       {
+        :operatingsystem => 'Centos',
         :bareos_director_template => 'bareos/spec.erb',
         :options => { 'opt_a' => 'value_a' }
       }
@@ -111,8 +116,8 @@ Console {
 
   describe 'Test Centos decommissioning - absent' do
     let(:facts) { {:bareos_absent => true, :operatingsystem => 'Centos'} }
-    it 'should remove Package[bareos-director-mysql] and related' do
-      should contain_package('bareos-director-mysql').with_ensure('absent')
+    it 'should remove Package[bareos-director] and related' do
+      should contain_package('bareos-director').with_ensure('absent')
       should contain_file('bareos-dir.conf').with_ensure('absent')
     end
     it 'should stop Service[bareos-dir]' do
@@ -124,8 +129,8 @@ Console {
   end
 
   describe 'Test decommissioning - disable' do
-    let(:facts) { {:bareos_disable => true} }
-    it { should contain_package('bareos-director-mysql').with_ensure('present') }
+    let(:facts) { {:bareos_disable => true, :operatingsystem => 'Debian'} }
+    it { should contain_package('bareos-director').with_ensure('present') }
     it 'should stop Service[bareos-dir]' do
       should contain_service('bareos-dir').with_ensure('stopped')
     end
@@ -137,13 +142,14 @@ Console {
   describe 'Test decommissioning - disableboot' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_disableboot => true,
         :bareos_monitor_target => '10.42.42.42',
         :director_pid_file =>  'some.pid.file',
         :monitor => true
       }
     end
-    it { should contain_package('bareos-director-mysql').with_ensure('present') }
+    it { should contain_package('bareos-director').with_ensure('present') }
     it { should_not contain_service('bareos-dir').with_ensure('present') }
     it { should_not contain_service('bareos-dir').with_ensure('absent') }
     it 'should not enable at boot Service[bareos-dir]' do
@@ -155,13 +161,14 @@ Console {
   describe 'Test noops mode' do
     let(:facts) do
       { 
+        :operatingsystem => 'Debian',
         :bareos_noops => true,
         :bareos_monitor_target => '10.42.42.42',
         :director_pid_file =>  'some.pid.file',
         :monitor => true
       }
     end
-    it { should contain_package('bareos-director-mysql').with_noop('true') }
+    it { should contain_package('bareos-director').with_noop('true') }
     it { should contain_service('bareos-dir').with_noop('true') }
     it { should contain_monitor__process('bareos_director_process').with_noop('true') }
   end

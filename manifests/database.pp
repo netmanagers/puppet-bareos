@@ -9,25 +9,31 @@ class bareos::database {
 
   include bareos
 
-  $real_db_password = $bareos::database_password ? {
-    ''      => $bareos::real_default_password,
-    default => $bareos::database_password,
-  }
+  ### Managed resources
+  require bareos::repository
 
-  $script_directory = $::operatingsystem ? {
-    /(?i:Debian|Ubuntu|Mint)/ => '/usr/share/bareos-director',
-    default                   => '/usr/libexec/bareos',
-  }
-
-  $db_parameters = $bareos::database_backend ? {
-    'sqlite' => '',
-    'mysql'  => "--host=${bareos::database_host} --user=${bareos::database_user} --password=${real_db_password} --port=${bareos::database_port} --database=${bareos::database_name}",
+  package { "bareos-database-${bareos::database_backend}":
+    ensure  => $bareos::manage_package,
+    noop    => $bareos::noops,
+    require => Class['bareos::repository'],
   }
 
   if $bareos::manage_database {
+    $real_db_password = $bareos::database_password ? {
+      ''      => $bareos::real_default_password,
+      default => $bareos::database_password,
+    }
+
+    $script_directory = '/usr/lib/bareos/scripts',
+
+    $db_parameters = $bareos::database_backend ? {
+      'sqlite' => '',
+      'mysql'  => "--host=${bareos::database_host} --user=${bareos::database_user} --password=${real_db_password} --port=${bareos::database_port} --database=${bareos::database_name}",
+    }
+
     exec { 'create_db_and_tables':
-      command     => "${script_directory}/create_bareos_database;
-                      ${script_directory}/make_bareos_tables ${db_parameters}",
+      command     => "${script_directory}/create_${bareos::database_backend}_database;
+                      ${script_directory}/make_${bareos::database_backend}_tables ${db_parameters}",
       refreshonly => true,
     }
 

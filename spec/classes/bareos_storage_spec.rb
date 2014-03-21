@@ -6,6 +6,7 @@ describe 'bareos::storage' do
   let(:node) { 'rspec.example42.com' }
   let(:facts) do
     {
+      :operatingsystem => 'Debian',
       :manage_storage => 'true',
       :ipaddress => '10.42.42.42',
       :service_autorestart => true
@@ -13,7 +14,7 @@ describe 'bareos::storage' do
   end
   describe 'Test standard Centos installation' do
     let(:facts) { {  :operatingsystem => 'Centos' } } 
-    it { should contain_package('bareos-storage-mysql').with_ensure('present') }
+    it { should contain_package('bareos-storage').with_ensure('present') }
     it { should contain_file('bareos-sd.conf').with_ensure('present') }
     it { should contain_file('bareos-sd.conf').with_path('/etc/bareos/bareos-sd.conf') }
     it { should contain_file('bareos-sd.conf').without_content }
@@ -24,7 +25,7 @@ describe 'bareos::storage' do
 
   describe 'Test standard Debian installation' do
     let(:facts) { {  :operatingsystem => 'Debian' } }
-    it { should contain_package('bareos-sd-mysql').with_ensure('present') }
+    it { should contain_package('bareos-storage').with_ensure('present') }
   end
 
   describe 'Test service autorestart' do
@@ -36,6 +37,7 @@ describe 'bareos::storage' do
   describe 'Test customizations - provide source' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_storage_source  => 'puppet:///modules/bareos/bareos.source'
       }
     end
@@ -46,6 +48,7 @@ describe 'bareos::storage' do
   describe 'Test customizations - default_password' do
     let(:facts) do
       {
+        :operatingsystem => 'CentOS',
         :bareos_storage_name => 'storage_master',
         :bareos_default_password => 'master_pass',
         :bareos_storage_template => 'bareos/bareos-sd.conf.erb'
@@ -57,6 +60,7 @@ describe 'bareos::storage' do
   describe 'Test customizations - provided template' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_storage_name => 'here_storage',
         :bareos_default_password => 'stuvwxyz',
         :bareos_storage_password => 'storage_pass',
@@ -110,6 +114,7 @@ Messages {
   describe 'Test customizations - custom template' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_storage_template => 'bareos/spec.erb',
         :options => { 'opt_a' => 'value_a' }
       }
@@ -127,6 +132,7 @@ Messages {
   describe 'Test Centos decommissioning - absent' do
     let(:facts) do
       { 
+        :operatingsystem => 'CentOS',
         :bareos_absent => true,
         :bareos_monitor_target => '10.42.42.42',
         :storage_pid_file =>  'some.pid.file',
@@ -134,7 +140,7 @@ Messages {
         :monitor => true
       }
     end
-    it 'should remove Package[bareos-storage-mysql]' do should contain_package('bareos-storage-mysql').with_ensure('absent') end
+    it 'should remove Package[bareos-storage]' do should contain_package('bareos-storage').with_ensure('absent') end
     it 'should stop Service[bareos-sd]' do should contain_service('bareos-sd').with_ensure('stopped') end
     it 'should not enable at boot Service[bareos-sd]' do should contain_service('bareos-sd').with_enable('false') end
   end
@@ -142,6 +148,7 @@ Messages {
   describe 'Test Debian decommissioning - absent' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_absent => true,
         :bareos_monitor_target => '10.42.42.42',
         :storage_pid_file =>  'some.pid.file',
@@ -149,7 +156,7 @@ Messages {
         :monitor => true
       }
     end
-    it 'should remove Package[bareos-sd-mysql]' do should contain_package('bareos-sd-mysql').with_ensure('absent') end
+    it 'should remove Package[bareos-storage]' do should contain_package('bareos-storage').with_ensure('absent') end
     it 'should stop Service[bareos-sd]' do should contain_service('bareos-sd').with_ensure('stopped') end
     it 'should not enable at boot Service[bareos-sd]' do should contain_service('bareos-sd').with_enable('false') end
   end
@@ -157,13 +164,14 @@ Messages {
   describe 'Test decommissioning - disable' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_disable => true,
         :bareos_monitor_target => '10.42.42.42',
         :storage_pid_file =>  'some.pid.file',
         :monitor => true
       }
     end
-    it { should contain_package('bareos-storage-mysql').with_ensure('present') }
+    it { should contain_package('bareos-storage').with_ensure('present') }
     it 'should stop Service[bareos-sd]' do should contain_service('bareos-sd').with_ensure('stopped') end
     it 'should not enable at boot Service[bareos-sd]' do should contain_service('bareos-sd').with_enable('false') end
   end
@@ -171,13 +179,14 @@ Messages {
   describe 'Test decommissioning - disableboot' do
     let(:facts) do
       { 
+        :operatingsystem => 'Debian',
         :bareos_disableboot => true,
         :bareos_monitor_target => '10.42.42.42',
         :storage_pid_file =>  'some.pid.file',
         :monitor => true 
       }
     end
-    it { should contain_package('bareos-storage-mysql').with_ensure('present') }
+    it { should contain_package('bareos-storage').with_ensure('present') }
     it { should_not contain_service('bareos-sd').with_ensure('present') }
     it { should_not contain_service('bareos-sd').with_ensure('absent') }
     it 'should not enable at boot Service[bareos-sd]' do should contain_service('bareos-sd').with_enable('false') end
@@ -187,13 +196,14 @@ Messages {
   describe 'Test noops mode' do
     let(:facts) do
       { 
+        :operatingsystem => 'Debian',
         :bareos_noops => true,
         :bareos_monitor_target => '10.42.42.42',
         :storage_pid_file =>  'some.pid.file',
         :monitor => true 
       }
     end
-    it { should contain_package('bareos-storage-mysql').with_noop('true') }
+    it { should contain_package('bareos-storage').with_noop('true') }
     it { should contain_service('bareos-sd').with_noop('true') }
     it { should contain_monitor__process('bareos_storage_process').with_noop('true') }
     it { should contain_monitor__process('bareos_storage_process').with_noop('true') }

@@ -39,6 +39,9 @@ on Example42 main modules set.
   
   Als check *params.pp*, *init.pp* and the manifests for details.
 
+* Adds the repositories from bareos.org. Current implementation on repositories management is crude and
+  not very well tested. If you find any error, please let us know.
+
 * Install bareos with default settings: this, by default, will install only the Client daemon
   (bareos-fd) and, following Ex42 modules standard practice, will leave all the default configuration
   as provided by your distribution.

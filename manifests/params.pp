@@ -16,6 +16,16 @@ class bareos::params {
 
   ### Application related parameters
 
+  $repo_distro = $::operatingsystem ? {
+    /(?i:Debian|Ubuntu|Mint)/                          => 'Debian_7.0',
+    /(?i:Ubuntu)/                                      => 'xUbuntu_12.04',
+    /(?i:redhat|centos|scientific|oraclelinux|fedora)/ => "${::operatingsystem}_${::lsbmajdistrelease}",
+    default                                            => 'UNKNOWN',
+  }
+
+  # One of http://download.bareos.org/bareos/release/
+  $repo_flavour = 'latest'
+
   $manage_client   = true
   $manage_storage  = false
   $manage_director = false
@@ -66,8 +76,7 @@ class bareos::params {
   }
 
   $client_package = $::operatingsystem ? {
-    /(?i:Debian|Ubuntu|Mint)/ => 'bareos-fd',
-    default                   => 'bareos-client',
+    default                   => 'bareos-filedaemon',
   }
 
   $client_service = $::operatingsystem ? {
@@ -88,7 +97,7 @@ class bareos::params {
   $director_clients_dir = "${bareos::params::config_dir}/clients.d"
 
   $director_package = $::operatingsystem ? {
-    default                   => "bareos-director-${bareos::params::database_backend}",
+    default                   => 'bareos-director',
   }
 
   $director_config_file = $::operatingsystem ? {
@@ -99,7 +108,6 @@ class bareos::params {
   $director_source = ''
 
   $director_service = $::operatingsystem ? {
-    /(?i:Debian|Ubuntu|Mint)/ => 'bareos-director',
     default => 'bareos-dir',
   }
 
@@ -120,8 +128,7 @@ class bareos::params {
   }
 
   $storage_package = $::operatingsystem ? {
-    /(?i:Debian|Ubuntu|Mint)/ => "bareos-sd-${bareos::params::database_backend}",
-    default                   => "bareos-storage-${bareos::params::database_backend}",
+    default                   => 'bareos-storage',
   }
 
   $storage_template = ''
@@ -153,7 +160,7 @@ class bareos::params {
   $console_password = ''
 
   $console_package = $::operatingsystem ? {
-    default => 'bareos-console',
+    default => 'bareos-bconsole',
   }
 
   $console_config_file = $::operatingsystem ? {

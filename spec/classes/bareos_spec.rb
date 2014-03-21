@@ -4,7 +4,7 @@ describe 'bareos' do
 
   let(:title) { 'bareos' }
   let(:node) { 'rspec.example42.com' }
-  let(:facts) { { :ipaddress => '10.42.42.42' } }
+  let(:facts) { { :ipaddress => '10.42.42.42', :operatingsystem => 'Debian' } }
 
   describe 'Test customizations - source_dir' do
     let(:params) { {:source_dir => "puppet:///modules/monit/dir/spec" , :source_dir_purge => true } }

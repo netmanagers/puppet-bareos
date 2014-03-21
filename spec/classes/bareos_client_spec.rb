@@ -4,19 +4,23 @@ describe 'bareos::client' do
 
   let(:title) { 'bareos::client' }
   let(:node) { 'rspec.example42.com' }
-  let(:facts) { { :ipaddress => '10.42.42.42', :service_autorestart => true } }
+  let(:facts) do
+    { 
+      :operatingsystem => 'Debian',
+      :ipaddress => '10.42.42.42',
+      :service_autorestart => true 
+    }
+  end
 
   describe 'Test standard Centos installation' do
-    let(:facts) { { :operatingsystem => 'Centos' } }
-    it { should contain_package('bareos-client').with_ensure('present') }
+    it { should contain_package('bareos-filedaemon').with_ensure('present') }
     it { should contain_file('bareos-fd.conf').with_ensure('present') }
     it { should contain_service('bareos-fd').with_ensure('running') }
     it { should contain_service('bareos-fd').with_enable('true') }
   end
 
   describe 'Test standard Debian installation' do
-    let(:facts) { { :operatingsystem => 'Debian' } }
-    it { should contain_package('bareos-fd').with_ensure('present') }
+    it { should contain_package('bareos-filedaemon').with_ensure('present') }
     it { should contain_file('bareos-fd.conf').with_ensure('present') }
     it { should contain_file('bareos-fd.conf').with_path('/etc/bareos/bareos-fd.conf') }
     it { should contain_file('bareos-fd.conf').without_content }
@@ -34,6 +38,7 @@ describe 'bareos::client' do
   describe 'Test customizations - provide source' do
     let(:facts) do
       {
+        :operatingsystem => 'Centos',
         :bareos_client_source  => 'puppet:///modules/bareos/bareos.source'
       }
     end
@@ -44,6 +49,7 @@ describe 'bareos::client' do
   describe 'Test customizations - master_password' do
     let(:facts) do
       {
+        :operatingsystem => 'Centos',
         :bareos_client_name => 'master_client',
         :bareos_default_password => 'abcdefg',
         :bareos_client_template => 'bareos/bareos-fd.conf.erb'
@@ -55,6 +61,7 @@ describe 'bareos::client' do
   describe 'Test customizations - provided template' do
     let(:facts) do
       {
+        :operatingsystem => 'Debian',
         :bareos_director_name => 'here_director',
         :bareos_default_password => 'testing',
         :bareos_client_password => 'client_pass',
@@ -105,6 +112,7 @@ Messages {
   describe 'Test customizations - custom template' do
     let(:facts) do
       {
+        :operatingsystem => 'Centos',
         :bareos_client_template => 'bareos/spec.erb',
         :options => { 'opt_a' => 'value_a' }
       }
@@ -121,6 +129,7 @@ Messages {
   describe 'Test standard installation with monitoring and firewalling' do
     let(:facts) do
       {
+        :operatingsystem       => 'Debian',
         :monitor               => 'true',
         :bareos_monitor_target => '10.42.42.42',
         :firewall              => 'true',
@@ -130,7 +139,7 @@ Messages {
         :concat_basedir        => '/var/lib/puppet/concat',
       }
     end
-    it { should contain_package('bareos-client').with_ensure('present') }
+    it { should contain_package('bareos-filedaemon').with_ensure('present') }
     it { should contain_service('bareos-fd').with_ensure('running') }
     it { should contain_service('bareos-fd').with_enable(true) }
     it { should contain_file('bareos-fd.conf').with_ensure('present') }
@@ -141,8 +150,8 @@ Messages {
 
   describe 'Test Centos decommissioning - absent' do
     let(:facts) { {:bareos_absent => true, :operatingsystem => 'Centos'} }
-    it 'should remove Package[bareos-client]' do
-      should contain_package('bareos-client').with_ensure('absent')
+    it 'should remove Package[bareos-filedaemon]' do
+      should contain_package('bareos-filedaemon').with_ensure('absent')
       should contain_file('bareos-fd.conf').with_ensure('absent')
     end
     it 'should stop Service[bareos-fd]' do
@@ -156,7 +165,7 @@ Messages {
   describe 'Test Debian decommissioning - absent' do
     let(:facts) { {:bareos_absent => true, :operatingsystem => 'Debian'} }
     it 'should remove Package[bareos-fd]' do
-      should contain_package('bareos-fd').with_ensure('absent')
+      should contain_package('bareos-filedaemon').with_ensure('absent')
     end
     it 'should stop Service[bareos-fd]' do
       should contain_service('bareos-fd').with_ensure('stopped')
@@ -167,8 +176,8 @@ Messages {
   end
 
   describe 'Test decommissioning - disable' do
-    let(:facts) { {:bareos_disable => true} }
-    it { should contain_package('bareos-client').with_ensure('present') }
+    let(:facts) { {:bareos_disable => true, :operatingsystem => 'Debian'} }
+    it { should contain_package('bareos-filedaemon').with_ensure('present') }
     it 'should stop Service[bareos-fd]' do
       should contain_service('bareos-fd').with_ensure('stopped')
     end
@@ -178,8 +187,8 @@ Messages {
   end
 
   describe 'Test decommissioning - disableboot' do
-    let(:facts) { {:bareos_disableboot => true} }
-    it { should contain_package('bareos-client').with_ensure('present') }
+    let(:facts) { {:bareos_disableboot => true, :operatingsystem => 'Debian'} }
+    it { should contain_package('bareos-filedaemon').with_ensure('present') }
     it { should_not contain_service('bareos-fd').with_ensure('present') }
     it { should_not contain_service('bareos-fd').with_ensure('absent') }
     it 'should not enable at boot Service[bareos-fd]' do
@@ -188,8 +197,8 @@ Messages {
   end
 
   describe 'Test noops mode' do
-    let(:facts) { {:bareos_noops => true} }
-    it { should contain_package('bareos-client').with_noop('true') }
+    let(:facts) { {:bareos_noops => true, :operatingsystem => 'Centos'} }
+    it { should contain_package('bareos-filedaemon').with_noop('true') }
     it { should contain_file('bareos-fd.conf').with_noop('true') }
     it { should contain_service('bareos-fd').with_noop('true') }
   end

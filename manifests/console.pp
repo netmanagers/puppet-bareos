@@ -26,9 +26,12 @@ class bareos::console {
   }
 
   ### Managed resources
+  require bareos::repository
+
   package { $bareos::console_package:
     ensure  => $bareos::manage_package,
     noop    => $bareos::noops,
+    require => Class['bareos::repository'],
   }
 
   file { 'bconsole.conf':
