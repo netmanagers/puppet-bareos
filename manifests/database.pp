@@ -24,7 +24,7 @@ class bareos::database {
       default => $bareos::database_password,
     }
 
-    $script_directory = '/usr/lib/bareos/scripts',
+    $script_directory = '/usr/lib/bareos/scripts'
 
     $db_parameters = $bareos::database_backend ? {
       'sqlite' => '',
