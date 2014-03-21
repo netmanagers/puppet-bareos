@@ -20,7 +20,6 @@ class bareos (
   $database_name           = params_lookup( 'database_name' ),
   $database_user           = params_lookup( 'database_user' ),
   $database_password       = params_lookup( 'database_password' ),
-  $pid_directory           = params_lookup( 'pid_directory' ),
   $heartbeat_interval      = params_lookup( 'heartbeat_interval'),
   $password_salt           = params_lookup( 'password_salt' ),
   $default_password        = params_lookup( 'default_password' ),

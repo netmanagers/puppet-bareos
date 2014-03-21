@@ -6,7 +6,6 @@ Storage {
   SDAddress = <%= scope.lookupvar('bareos::storage_address') %>
   SDPort = <%= scope.lookupvar('bareos::storage_port') %>
   WorkingDirectory = <%= scope.lookupvar('bareos::working_directory') %>
-  Pid Directory = <%= scope.lookupvar('bareos::pid_directory') %>
   Maximum Concurrent Jobs = <%= scope.lookupvar('bareos::storage_max_concurrent') %>
   Heartbeat Interval = <%= scope.lookupvar('bareos::heartbeat_interval') %>
 }

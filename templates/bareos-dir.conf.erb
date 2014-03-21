@@ -6,7 +6,6 @@ Director {
   DirPort = <%= scope.lookupvar('bareos::director_port') %>
   QueryFile = <%= scope.lookupvar('bareos::config_dir') %>/scripts/query.sql
   WorkingDirectory = <%= scope.lookupvar('bareos::working_directory') %>
-  PidDirectory = <%= scope.lookupvar('bareos::pid_directory') %>
   MaximumConcurrentJobs = <%= scope.lookupvar('bareos::director_max_concurrent') %>
   Password = "<%= @real_director_password %>"
   Messages = "<%= scope.lookupvar('bareos::default_messages') %>"

@@ -31,10 +31,6 @@ class bareos::params {
     default => '/etc/bareos',
   }
 
-  $pid_directory = $::operatingsystem ? {
-    /(?i:Debian|Ubuntu|Mint)/ => '/var/run/bareos',
-    default => '/var/run',
-  }
   $heartbeat_interval = '1 minute'
   $working_directory  = $::operatingsystem ? {
     default => '/var/spool/bareos'
@@ -66,7 +62,7 @@ class bareos::params {
   $client_source = ''
 
   $client_pid_file = $::operatingsystem ? {
-    default => "${bareos::params::pid_directory}/bareos-fd.${bareos::params::client_port}.pid",
+    default => "${bareos::params::working_directory}/bareos-fd.${bareos::params::client_port}.pid",
   }
 
   $client_package = $::operatingsystem ? {

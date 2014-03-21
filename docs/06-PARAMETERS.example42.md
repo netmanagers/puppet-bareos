@@ -147,9 +147,6 @@
 # [*config_file_init*]
 #   Path of configuration file sourced by init script
 #
-# [*pid_directory*]
-#   Path where PID files will be created.
-#
 # [*data_dir*]
 #   Path of application data directory. Used by puppi
 #

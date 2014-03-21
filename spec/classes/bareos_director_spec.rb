@@ -54,7 +54,6 @@ describe 'bareos::director' do
         :bareos_default_password => 'default_pass',
         :bareos_director_password => 'director_pass',
         :bareos_director_port => '4242',
-        :bareos_pid_directory => '/some/dir',
         :bareos_director_address => '10.42.42.42',
         :bareos_director_template => 'bareos/bareos-dir.conf.erb'
       }
@@ -68,7 +67,6 @@ Director {
   DirPort = 4242
   QueryFile = /etc/bareos/scripts/query.sql
   WorkingDirectory = /var/spool/bareos
-  PidDirectory = /some/dir
   MaximumConcurrentJobs = 30
   Password = "director_pass"
   Messages = "standard"

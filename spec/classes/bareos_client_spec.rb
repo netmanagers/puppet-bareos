@@ -60,7 +60,7 @@ describe 'bareos::client' do
         :bareos_client_password => 'client_pass',
         :bareos_client_name => 'this_client',
         :bareos_client_port => '4242',
-        :bareos_pid_directory => '/some/dir',
+        :bareos_working_directory => '/some/dir',
         :bareos_heartbeat_interval => '1 week',
         :bareos_client_address => '10.42.42.42',
         :bareos_client_template => 'bareos/bareos-fd.conf.erb'
@@ -86,8 +86,7 @@ Director {
 FileDaemon {
   Name = "this_client"
   FDport = 4242
-  WorkingDirectory = /var/spool/bareos
-  PidDirectory = /some/dir
+  WorkingDirectory = /some/dir
   FDAddress = 10.42.42.42
   Heartbeat Interval = 1 week
 }

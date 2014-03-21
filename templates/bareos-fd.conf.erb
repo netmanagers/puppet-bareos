@@ -18,7 +18,6 @@ FileDaemon {
   Name = "<%= scope.lookupvar('bareos::client_name') %>"
   FDport = <%= scope.lookupvar('bareos::client_port') %>
   WorkingDirectory = <%= scope.lookupvar('bareos::working_directory') %>
-  PidDirectory = <%= scope.lookupvar('bareos::pid_directory') %>
 <% if scope.lookupvar('bareos::client_max_concurrent') != '' -%>
   MaximumConcurrentJobs = <%= scope.lookupvar('bareos::client_max_concurrent') %>
 <% end -%>
