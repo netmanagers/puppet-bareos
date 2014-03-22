@@ -19,7 +19,7 @@ class bareos::params {
   $repo_distro = $::operatingsystem ? {
     /(?i:Debian|Ubuntu|Mint)/                          => 'Debian_7.0',
     /(?i:Ubuntu)/                                      => 'xUbuntu_12.04',
-    /(?i:redhat|centos|scientific|oraclelinux|fedora)/ => "${::operatingsystem}_${::lsbmajdistrelease}",
+    /(?i:redhat|centos|scientific|oraclelinux|fedora)/ => "${::operatingsystem}_${::operatingsystemrelease}",
     default                                            => 'UNKNOWN',
   }
 
