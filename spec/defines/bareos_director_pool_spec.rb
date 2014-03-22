@@ -28,7 +28,6 @@ Pool {
   PoolType = Backup
   MaximumVolumeJobs = 1
   MaximumVolumeBytes = 1G
-  UseVolumeOnce = true
   Recycle = true
   ActionOnPurge = truncate
   AutoPrune = true
@@ -49,7 +48,6 @@ Pool {
         :type => 'BackupFull',
         :maximum_volume_jobs => '3',
         :maximum_volume_bytes => '10G',
-        :use_volume_once  => false,
         :recycle => false,
         :action_on_purge => 'delete',
         :auto_prune => false,
@@ -68,7 +66,6 @@ Pool {
   PoolType = BackupFull
   MaximumVolumeJobs = 3
   MaximumVolumeBytes = 10G
-  UseVolumeOnce = false
   Recycle = false
   ActionOnPurge = delete
   AutoPrune = false

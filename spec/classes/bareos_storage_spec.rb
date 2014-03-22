@@ -78,7 +78,7 @@ Storage {
   Name = "here_storage"
   SDAddress = 10.42.42.42
   SDPort = 4242
-  WorkingDirectory = /var/spool/bareos
+  WorkingDirectory = /var/lib/bareos
   Maximum Concurrent Jobs = 30
   Heartbeat Interval = some interval
 }

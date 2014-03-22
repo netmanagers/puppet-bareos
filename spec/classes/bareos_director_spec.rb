@@ -70,7 +70,7 @@ Director {
   Name = "here_director"
   DirPort = 4242
   QueryFile = /etc/bareos/scripts/query.sql
-  WorkingDirectory = /var/spool/bareos
+  WorkingDirectory = /var/lib/bareos
   MaximumConcurrentJobs = 30
   Password = "director_pass"
   Messages = "standard"
