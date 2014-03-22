@@ -2,7 +2,7 @@
 [bareos]
 name=Backup Archiving Recovery Open Sourced
 type=rpm-md
-baseurl=http://download.bareos.org/bareos/release/<%= scope.lookupvar('bareos::repo_flavour') %>/<%= scope.lookupvar('bareos::repo_distro') %>/$basearch
+baseurl=http://download.bareos.org/bareos/release/<%= scope.lookupvar('bareos::repo_flavour') %>/<%= scope.lookupvar('bareos::repo_distro') %>
 enabled=1
 gpgkey=http://download.bareos.org/bareos/release/<%= scope.lookupvar('bareos::repo_flavour') %>/<%= scope.lookupvar('bareos::repo_distro') %>/repodata/repomd.xml.key
 gpgcheck=1
