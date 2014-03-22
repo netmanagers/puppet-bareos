@@ -25,11 +25,12 @@ class bareos::director {
 
   ### Managed resources
   require bareos::repository
+  include bareos::database
 
   package { $bareos::director_package:
     ensure  => $bareos::manage_package,
     noop    => $bareos::noops,
-    require => [Class['bareos::repository'], Package['database_package']],
+    require => [Class['bareos::repository'], Package['bareos-database']],
   }
 
   if $bareos::director_configs_dir != $bareos::config_dir and !defined(File['bareos-director_configs_dir']) {
