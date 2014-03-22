@@ -12,8 +12,9 @@ class bareos::database {
   ### Managed resources
   require bareos::repository
 
-  package { "bareos-database-${bareos::database_backend}":
+  package { 'database_package':
     ensure  => $bareos::manage_package,
+    name    => "bareos-database-${bareos::database_backend}",
     noop    => $bareos::noops,
     require => Class['bareos::repository'],
   }

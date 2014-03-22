@@ -1,16 +1,11 @@
 # Puppet module: bareos
 
-This is a Puppet module for bareos based on the second generation layout ("NextGen") of Example42 Puppet Modules.
+This is a Puppet module for bareos (Backup Archiving Recovery Open Sourced), a bacula fork 
+based on the second generation layout ("NextGen") of Example42 Puppet Modules.
 
 Made by Javier Bértoli / Netmanagers
 
 Forked from http://github.com/netmanagers/puppet-bacula
-
-**WARNING!!! WARNING!!! WARNING!!!**
-
-**NOT EVEN TESTED ONCE YET!!!!!!!!!!!!!!**
-
-**HERE BE DRAGONS!!**
 
 Based on Example42 modules made by Alessandro Franceschi / Lab42
 
