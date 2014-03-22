@@ -43,7 +43,7 @@ class bareos::params {
 
   $heartbeat_interval = '1 minute'
   $working_directory  = $::operatingsystem ? {
-    default => '/var/spool/bareos'
+    default => '/var/lib/bareos'
   }
 
   $password_salt = ''
