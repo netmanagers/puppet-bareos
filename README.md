@@ -21,6 +21,7 @@ use and install Puppi)
 For detailed info about the logic and usage patterns of Example42 modules check the DOCS directory
 on Example42 main modules set.
 
+For detailed info about bareos configuration, please check http://doc.bareos.org
 
 ## USAGE - Basic management
 

@@ -1,5 +1,5 @@
 name 'netmanagers-bareos'
-version '0.0.8'
+version '1.0.0'
 
 author 'Javier Bértoli'
 license 'Apache2'
