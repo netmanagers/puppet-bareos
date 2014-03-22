@@ -25,7 +25,7 @@ describe 'bareos::director::catalog' do
 
 Catalog {
   Name = "sample1"
-  DBDriver = dbi:mysql
+  DBDriver = mysql
   DBAddress = localhost
   DBName = "bareos"; dbuser = "bareos"; dbpassword = "bareos";
 }
@@ -38,7 +38,7 @@ Catalog {
     let(:params) do
       {
         :name => 'sample2',
-        :db_driver => 'dbi:postgres',
+        :db_driver => 'postgres',
         :db_address => '10.0.0.3',
         :db_port => '3824',
         :db_name => 'test',
@@ -51,7 +51,7 @@ Catalog {
 
 Catalog {
   Name = "sample2"
-  DBDriver = dbi:postgres
+  DBDriver = postgres
   DBAddress = 10.0.0.3
   DBPort = 3824
   DBName = "test"; dbuser = "netmanagers"; dbpassword = "password";

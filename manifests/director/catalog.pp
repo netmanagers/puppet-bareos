@@ -3,7 +3,7 @@
 # Used to create catalog resources
 #
 define bareos::director::catalog (
-  $db_driver = 'dbi:mysql',
+  $db_driver = 'mysql',
   $db_address = 'localhost',
   $db_port = '',
   $db_name = 'bareos',
