@@ -1,7 +1,7 @@
 name 'netmanagers-bareos'
 version '1.0.0'
 
-author 'Javier Bértoli'
+author 'Javier Bertoli'
 license 'Apache2'
 project_page 'http://www.netmanagers.com.ar'
 source 'https://github.com/netmanagers/puppet-bareos'
