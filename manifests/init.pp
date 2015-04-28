@@ -14,6 +14,7 @@ class bareos (
   $manage_director         = params_lookup( 'manage_director' ),
   $manage_console          = params_lookup( 'manage_console' ),
   $manage_database         = params_lookup( 'manage_database' ),
+  $manage_repository       = params_lookup( 'manage_repository'),
   $database_backend        = params_lookup( 'database_backend' ),
   $database_host           = params_lookup( 'database_host' ),
   $database_port           = params_lookup( 'database_port' ),
@@ -129,6 +130,7 @@ class bareos (
   $bool_manage_director=any2bool($manage_director)
   $bool_manage_console=any2bool($manage_console)
   $bool_manage_database=any2bool($manage_database)
+  $bool_manage_repository=any2bool($manage_repository)
 
   ### Definition of some variables used in the module
 
