@@ -15,6 +15,7 @@ class bareos (
   $manage_console          = params_lookup( 'manage_console' ),
   $manage_database         = params_lookup( 'manage_database' ),
   $manage_repository       = params_lookup( 'manage_repository'),
+  $manage_uid              = params_lookup( 'uid'),
   $database_backend        = params_lookup( 'database_backend' ),
   $database_host           = params_lookup( 'database_host' ),
   $database_port           = params_lookup( 'database_port' ),
@@ -131,6 +132,7 @@ class bareos (
   $bool_manage_console=any2bool($manage_console)
   $bool_manage_database=any2bool($manage_database)
   $bool_manage_repository=any2bool($manage_repository)
+  $bool_manage_uid=any2bool($manage_uid)
 
   ### Definition of some variables used in the module
 
@@ -208,12 +210,15 @@ class bareos (
 
   ### Resources common to all components
 
-  group { $bareos::process_group:
-    ensure => present,
-  } ->
-  user { $bareos::process_user:
-    ensure => present,
-    gid    => 'bareos',
+
+  if ($bool_manage_uid){
+	  group { $bareos::process_group:
+	    ensure => present,
+	  } ->
+	  user { $bareos::process_user:
+	    ensure => present,
+	    gid    => 'bareos',
+	  }
   }
 
   file { $bareos::working_directory:
@@ -221,11 +226,11 @@ class bareos (
     owner   => $bareos::process_user,
     group   => $bareos::process_group,
     require => User[$bareos::process_user],
+    recurse => true,
   }
   if $bareos::working_directory != '/var/lib/bareos' {
     file { '/var/lib/bareos':
       ensure  => link,
-      target  => $bareos::working_directory,
       require => File[$bareos::working_directory],
     }
   }
