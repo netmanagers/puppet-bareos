@@ -231,6 +231,7 @@ class bareos (
   if $bareos::working_directory != '/var/lib/bareos' {
     file { '/var/lib/bareos':
       ensure  => link,
+      target => $bareos::working_directory,
       require => File[$bareos::working_directory],
     }
   }
