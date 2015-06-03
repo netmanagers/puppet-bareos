@@ -1,8 +1,8 @@
-source "https://rubygems.org"
+source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
 gem "rake"
-gem "puppet", ENV['PUPPET_VERSION'] || '~> 2.7.0'
+gem "puppet", ENV['PUPPET_VERSION'] || '~> 3.8.0'
 gem "puppet-lint"
-gem "rspec-puppet", '~> 1.0.0'
+gem "rspec-puppet", '~> 2.2'
 gem "puppet-syntax"
 gem "puppetlabs_spec_helper"
