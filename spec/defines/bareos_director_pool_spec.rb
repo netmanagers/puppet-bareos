@@ -9,7 +9,7 @@ describe 'bareos::director::pool' do
       :ipaddress       => '10.42.42.42',
       :operatingsystem => 'Debian',
       :service_autorestart => true,
-      :bareos_director_service => 'Service[bareos-dir]',
+      :bareos_director_service => 'bareos-dir',
       :pool_configs_dir => '/etc/bareos/director.d',
     }
   end

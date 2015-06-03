@@ -9,7 +9,7 @@ describe 'bareos::director::client' do
       :ipaddress       => '10.42.42.42',
       :operatingsystem => 'Debian',
       :service_autorestart => true,
-      :bareos_director_service => 'Service[bareos-dir]',
+      :bareos_director_service => 'bareos-dir',
       :bareos_default_password => 'bareos'
     }
   end
