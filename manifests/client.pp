@@ -56,13 +56,13 @@ class bareos::client {
   }
 
   service { $bareos::client_service:
-      ensure     => $bareos::manage_service_ensure,
-      name       => $bareos::client_service,
-      enable     => $bareos::manage_service_enable,
-      hasstatus  => $bareos::service_status,
-      pattern    => $bareos::client_process,
-      require    => Package[$bareos::client_package],
-      noop       => $bareos::noops,
+      ensure    => $bareos::manage_service_ensure,
+      name      => $bareos::client_service,
+      enable    => $bareos::manage_service_enable,
+      hasstatus => $bareos::service_status,
+      pattern   => $bareos::client_process,
+      require   => Package[$bareos::client_package],
+      noop      => $bareos::noops,
     }
 
 

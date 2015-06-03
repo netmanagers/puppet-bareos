@@ -212,13 +212,13 @@ class bareos (
 
 
   if ($bool_manage_uid){
-	  group { $bareos::process_group:
-	    ensure => present,
-	  } ->
-	  user { $bareos::process_user:
-	    ensure => present,
-	    gid    => 'bareos',
-	  }
+      group { $bareos::process_group:
+        ensure => present,
+      } ->
+      user { $bareos::process_user:
+        ensure => present,
+        gid    => 'bareos',
+      }
   }
 
   file { $bareos::working_directory:

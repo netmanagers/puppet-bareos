@@ -71,13 +71,13 @@ class bareos::storage {
   }
 
   service { $bareos::storage_service:
-    ensure     => $bareos::manage_service_ensure,
-    name       => $bareos::storage_service,
-    enable     => $bareos::manage_service_enable,
-    hasstatus  => $bareos::service_status,
-    pattern    => $bareos::storage_process,
-    require    => Package[$bareos::storage_package],
-    noop       => $bareos::noops,
+    ensure    => $bareos::manage_service_ensure,
+    name      => $bareos::storage_service,
+    enable    => $bareos::manage_service_enable,
+    hasstatus => $bareos::service_status,
+    pattern   => $bareos::storage_process,
+    require   => Package[$bareos::storage_package],
+    noop      => $bareos::noops,
   }
 
   ### Provide puppi data, if enabled ( puppi => true )
