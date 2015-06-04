@@ -9,7 +9,7 @@ describe 'bareos::director::messages' do
       :ipaddress       => '10.42.42.42',
       :operatingsystem => 'Debian',
       :service_autorestart => true,
-      :bareos_director_service => 'Service[bareos-dir]',
+      :bareos_director_service => 'bareos-dir',
       :bareos_log_file => '/var/log/bareos/bareos.log'
     }
   end

@@ -85,13 +85,13 @@ class bareos::director {
   }
 
   service { $bareos::director_service:
-    ensure     => $bareos::manage_service_ensure,
-    name       => $bareos::director_service,
-    enable     => $bareos::manage_service_enable,
-    hasstatus  => $bareos::service_status,
-    pattern    => $bareos::director_process,
-    require    => Package[$bareos::director_package],
-    noop       => $bareos::noops,
+    ensure    => $bareos::manage_service_ensure,
+    name      => $bareos::director_service,
+    enable    => $bareos::manage_service_enable,
+    hasstatus => $bareos::service_status,
+    pattern   => $bareos::director_process,
+    require   => Package[$bareos::director_package],
+    noop      => $bareos::noops,
   }
 
   ### Provide puppi data, if enabled ( puppi => true )

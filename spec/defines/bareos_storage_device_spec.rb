@@ -9,7 +9,7 @@ describe 'bareos::storage::device' do
       :ipaddress       => '10.42.42.42',
       :operatingsystem => 'Debian',
       :service_autorestart => true,
-      :bareos_storage_service => 'Service[bareos-sd]',
+      :bareos_storage_service => 'bareos-sd',
       :storage_configs_dir => '/etc/bareos/storage.d',
     }
   end
