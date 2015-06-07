@@ -26,11 +26,13 @@ class bareos::params {
   # One of http://download.bareos.org/bareos/release/
   $repo_flavour = 'latest'
 
-  $manage_client   = true
-  $manage_storage  = false
-  $manage_director = false
-  $manage_console  = false
-  $manage_database = false
+  $manage_repository = true
+  $manage_uid        = true
+  $manage_client     = true
+  $manage_storage    = false
+  $manage_director   = false
+  $manage_console    = false
+  $manage_database   = false
 
   # Database type
   # One of 'mysql', 'postgresql', 'sqlite'
