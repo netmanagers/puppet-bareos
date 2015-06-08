@@ -17,7 +17,7 @@ class bareos::params {
   ### Application related parameters
 
   $repo_distro = $::operatingsystem ? {
-    /(?i:debian)/                                      => 'Debian_7.0',
+    /(?i:debian|linex)/                                => 'Debian_7.0',
     /(?i:ubuntu|mint)/                                 => 'xUbuntu_14.04',
     /(?i:redhat|centos|scientific|oraclelinux|fedora)/ => "${::operatingsystem}_${::operatingsystemmajrelease}",
     default                                            => 'UNKNOWN',
