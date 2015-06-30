@@ -14,11 +14,7 @@ Messages {
 <% end -%>
   console = <%= @console %>
   catalog = <%= @catalog %>
-<% if @array_append != [] -%>
-<% @array_append.each do |append| -%>
-  append = <%= append %>
-<% end -%>
-<% end -%>
+  append = "<%= scope.lookupvar('bareos::log_file') %>" = <%= append_type %>
 <% if @options_hash != {} -%>
 <% @options_hash.each do |key,value| -%>
   <%= key %> = <%= value %>
