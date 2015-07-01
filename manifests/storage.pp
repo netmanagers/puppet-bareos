@@ -46,6 +46,7 @@ class bareos::storage {
     file { 'bareos-storage_configs_dir':
       ensure  => directory,
       path    => $bareos::storage_configs_dir,
+      recurse => true,
       mode    => $bareos::config_file_mode,
       owner   => $bareos::config_file_owner,
       group   => $bareos::config_file_group,
