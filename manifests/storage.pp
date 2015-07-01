@@ -49,6 +49,8 @@ class bareos::storage {
       mode    => $bareos::config_file_mode,
       owner   => $bareos::config_file_owner,
       group   => $bareos::config_file_group,
+      purge   => $bareos::bool_config_dir_purge,
+      force   => $bareos::bool_config_dir_purge,
       require => Package[$bareos::storage_package],
       audit   => $bareos::manage_audit,
       noop    => $bareos::noops,
