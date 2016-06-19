@@ -15,7 +15,7 @@ class bareos (
   $manage_console          = params_lookup( 'manage_console' ),
   $manage_database         = params_lookup( 'manage_database' ),
   $manage_repository       = params_lookup( 'manage_repository'),
-  $manage_uid              = params_lookup( 'uid'),
+  $manage_uid              = params_lookup( 'manage_uid'),
   $database_backend        = params_lookup( 'database_backend' ),
   $database_host           = params_lookup( 'database_host' ),
   $database_port           = params_lookup( 'database_port' ),
