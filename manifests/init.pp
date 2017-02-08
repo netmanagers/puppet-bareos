@@ -23,6 +23,7 @@ class bareos (
   $database_user           = params_lookup( 'database_user' ),
   $database_password       = params_lookup( 'database_password' ),
   $heartbeat_interval      = params_lookup( 'heartbeat_interval'),
+  $auditing                = params_lookup( 'auditing'),
   $password_salt           = params_lookup( 'password_salt' ),
   $default_password        = params_lookup( 'default_password' ),
   $default_file_retention  = params_lookup( 'default_file_retention' ),

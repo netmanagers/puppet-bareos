@@ -59,4 +59,9 @@ Job {
 <% if @run_after_job != '' -%>
   RunAfterJob = "<%= @run_after_job %>"
 <% end -%>
+<% if @options_hash != {} -%>
+<% @options_hash.each do |key,value| -%>
+  <%= key %> = <%= value %>
+<% end -%>
+<% end -%>
 }

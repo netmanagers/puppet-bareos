@@ -44,6 +44,7 @@ class bareos::params {
   }
 
   $heartbeat_interval = '1 minute'
+  $auditing           = 'no'
   $working_directory  = $::operatingsystem ? {
     default => '/var/lib/bareos'
   }
