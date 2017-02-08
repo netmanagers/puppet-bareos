@@ -11,6 +11,7 @@ Director {
   Messages = "<%= scope.lookupvar('bareos::default_messages') %>"
   DirAddress = <%= scope.lookupvar('bareos::director_address') %>
   HeartbeatInterval = <%= scope.lookupvar('bareos::heartbeat_interval') %>
+  Auditing = <%= scope.lookupvar('bareos::auditing') %>
 }
 
 # Restricted Console, used by tray-monitor for Director status.

@@ -39,11 +39,13 @@ class bareos::params {
   $database_backend = 'mysql'
 
   ## Common variables
+  $config_dir_purge = false
   $config_dir = $::operatingsystem ? {
     default => '/etc/bareos',
   }
 
   $heartbeat_interval = '1 minute'
+  $auditing           = 'no'
   $working_directory  = $::operatingsystem ? {
     default => '/var/lib/bareos'
   }

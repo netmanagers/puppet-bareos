@@ -23,6 +23,7 @@ class bareos (
   $database_user           = params_lookup( 'database_user' ),
   $database_password       = params_lookup( 'database_password' ),
   $heartbeat_interval      = params_lookup( 'heartbeat_interval'),
+  $auditing                = params_lookup( 'auditing'),
   $password_salt           = params_lookup( 'password_salt' ),
   $default_password        = params_lookup( 'default_password' ),
   $default_file_retention  = params_lookup( 'default_file_retention' ),
@@ -91,6 +92,7 @@ class bareos (
   $source_dir_purge        = params_lookup( 'source_dir_purge' ),
   $service_autorestart     = params_lookup( 'service_autorestart' , 'global' ),
   $config_dir              = params_lookup( 'config_dir' ),
+  $config_dir_purge        = params_lookup( 'config_dir_purge' ),
   $config_file_mode        = params_lookup( 'config_file_mode' ),
   $config_file_owner       = params_lookup( 'config_file_owner' ),
   $config_file_group       = params_lookup( 'config_file_group' ),
@@ -116,6 +118,7 @@ class bareos (
   ) inherits bareos::params {
 
   $bool_source_dir_purge=any2bool($source_dir_purge)
+  $bool_config_dir_purge=any2bool($config_dir_purge)
   $bool_service_autorestart=any2bool($service_autorestart)
   $bool_absent=any2bool($absent)
   $bool_disable=any2bool($disable)
