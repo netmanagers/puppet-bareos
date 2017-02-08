@@ -76,6 +76,7 @@ Director {
   Messages = "standard"
   DirAddress = 10.42.42.42
   HeartbeatInterval = 1 minute
+  Auditing = no
 }
 
 # Restricted Console, used by tray-monitor for Director status.
