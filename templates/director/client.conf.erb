@@ -25,4 +25,9 @@ Client {
 <% if scope.lookupvar('bareos::heartbeat_interval') != '' -%>
   HeartbeatInterval = <%= scope.lookupvar('bareos::heartbeat_interval') %>
 <% end -%>
+<% if @options_hash != {} -%>
+<% @options_hash.each do |key,value| -%>
+  <%= key %> = <%= value %>
+<% end -%>
+<% end -%>
 }
